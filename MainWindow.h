@@ -1,9 +1,5 @@
 #include <QMainWindow>
-
-namespace Ui
-{
-    class MainWindow;
-}
+#include <QLabel>
 
 class MainWindow : public QMainWindow
 {
@@ -23,9 +19,9 @@ private slots:
     
 private:
 
-    const int MAX_ITER_NUM = 16;
+    QLabel *label;
 
-    Ui::MainWindow *ui;
+    const int MAX_ITER_NUM = 16;
     
     int iterNum;
 };

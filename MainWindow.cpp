@@ -1,21 +1,43 @@
 #include <QTextStream>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include "MainWindow.h"
-#include "ui_MainWindow.h"
+#include "FractalRenderer.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), iterNum(0)
+    : QMainWindow(parent), iterNum(0)
 {
-    ui->setupUi(this);
+    QPushButton *buttonIterate = new QPushButton("Iterate");
+    QPushButton *buttonClear = new QPushButton("Clear");
     
-    connect(ui->buttonIterate, SIGNAL(clicked()), this, SLOT(onButtonIterate()));
-    connect(ui->buttonClear, SIGNAL(clicked()), this, SLOT(onButtonClear()));
+    buttonIterate->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    buttonClear->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     
-    ui->label->setText("Iteration 0");
+    connect(buttonIterate, SIGNAL(clicked()), this, SLOT(onButtonIterate()));
+    connect(buttonClear, SIGNAL(clicked()), this, SLOT(onButtonClear()));
+    
+    label = new QLabel("Iteration 0");
+    QHBoxLayout *hlayout = new QHBoxLayout();
+    QVBoxLayout *vlayout = new QVBoxLayout();
+    FractalRenderer *frRenderer = new FractalRenderer(this);
+    
+    hlayout->addWidget(buttonIterate);
+    hlayout->addWidget(buttonClear);
+    hlayout->addStretch();
+    
+    vlayout->addWidget(frRenderer, 1);
+    vlayout->addLayout(hlayout);
+    vlayout->addWidget(label);
+
+    QWidget *centralWidget = new QWidget();
+    centralWidget->setLayout(vlayout);
+    this->setCentralWidget(centralWidget);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    
 }
 
 void MainWindow::onButtonIterate()
@@ -25,12 +47,12 @@ void MainWindow::onButtonIterate()
         ++iterNum;
         QString iterNumString;
         QTextStream(&iterNumString) << "Iteration " << iterNum;
-        ui->label->setText(iterNumString);
+        label->setText(iterNumString);
     }
 }
     
 void MainWindow::onButtonClear()
 {
-    ui->label->setText("Iteration 0");
+    label->setText("Iteration 0");
     iterNum = 0;
 }
