@@ -1,5 +1,6 @@
 #include <QMainWindow>
 #include <QLabel>
+#include "FractalRenderer.h"
 
 class MainWindow : public QMainWindow
 {
@@ -17,11 +18,15 @@ private slots:
     
     void onButtonClear();
     
+    void onComboBoxActivated(int index);
+    
 private:
 
-    QLabel *label;
-
     const int MAX_ITER_NUM = 16;
+
+    QLabel *label;
+    
+    FractalRenderer *frRenderer;
     
     int iterNum;
 };
