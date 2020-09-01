@@ -15,6 +15,5 @@ QT += core gui widgets
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += MainWindow.h
+HEADERS += MainWindow.h FractalRenderer.h
 SOURCES += main.cpp MainWindow.cpp
-FORMS += MainWindow.ui
