@@ -27,11 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
     hlayout->addWidget(buttonIterate);
     hlayout->addWidget(buttonClear);
     hlayout->addStretch();
+    hlayout->addWidget(label);
     
     vlayout->addWidget(frRenderer, 1);
     vlayout->addWidget(cbox);
     vlayout->addLayout(hlayout);
-    vlayout->addWidget(label);
 
     QWidget *centralWidget = new QWidget();
     centralWidget->setLayout(vlayout);
